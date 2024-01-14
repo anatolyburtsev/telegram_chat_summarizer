@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "python-project-template"
+version = "0.1.0"
+description = "Python project template"
+authors = ["Anatolii Burtsev <ab.canada.world@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+black = "^23.12.1"
+ruff = "^0.1.13"
+pre-commit = "^3.6.0"
+pytest = "^7.4.4"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
