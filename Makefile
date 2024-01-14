@@ -15,6 +15,3 @@ fetch_week:
 
 analyze:
 	@poetry run python src/query_data.py chat_$(CHAT_NAME).txt
-
-
-
