@@ -5,6 +5,15 @@ Project Template with Poetry and Pre-commit Hooks
 [![pre-commit](https://github.com/anatolyburtsev/python-project-template/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/anatolyburtsev/python-project-template/actions/workflows/pre-commit.yml)
 
 ### Getting started
+copy `.env.sample` to `.env` and fill with necessary data
+
+```bash
+make setup
+make fetch_week
+make analyze
+```
+
+### Development
 
 Install poetry:
 
