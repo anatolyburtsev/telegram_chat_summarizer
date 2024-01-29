@@ -12,17 +12,23 @@ from utils import split_file
     default=32000,
     help="Maximum chunk size in tokens. Default is 32,000.",
 )
-def process_file(filename: str, max_tokens: int):
+@click.option("--output", default="output.txt", help="Output file for the results.")
+def process_file(filename: str, max_tokens: int, output: str):
     chunks = split_file(filename, max_tokens)
 
     load_dotenv()
     client = OpenAI()
 
-    for idx, chunk in enumerate(chunks):
-        print(f"Processing chunk: {idx}")
-        data = " ".join(chunk)
-        result = answer_question(data, client)
-        print(result)
+    with open(output, "w") as file:
+        for idx, chunk in enumerate(chunks):
+            try:
+                print(f"Processing chunk: {idx}")
+                print(f"chunk: {idx}", file=file)
+                data = " ".join(chunk)
+                result = answer_question(data, client)
+                print(result, file=file)
+            except Exception as e:
+                print(f"Error processing chunk {idx}: {e}")
 
 
 def answer_question(data: str, client: OpenAI):
@@ -37,8 +43,10 @@ def answer_question(data: str, client: OpenAI):
             {
                 "role": "user",
                 "content": "I'm going to travel to that hotel with my spouse and 3 yo kid. "
-                "Find if any information is useful and nice to know for me. Ignore everything around adult"
-                " entertainments, such as alcohol, and people argues. Interested in facts and relevant opinions. ",
+                "Find if any information is useful and nice to know for me. Ignore everything around WiFi, adult"
+                "entertainments, such as alcohol, and people argues. Interested in facts and relevant opinions. Don't "
+                "suggest any further actions, e.g. check directly with the hotel or families should enjoy "
+                "stay there. Please, just do an analysis",
             },
         ],
     )
